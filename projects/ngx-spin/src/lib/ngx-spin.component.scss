@@ -1,0 +1,279 @@
+$spin-circle-size-sm: 30px;
+$spin-circle-size: 40px;
+$spin-circle-size-lg: 50px;
+
+$primary-color: #2196f3;
+$ease-in-out-circ: cubic-bezier(0.78, 0.14, 0.15, 0.86);
+
+$component-background: #fff;
+$shadow-color-inverse: $component-background;
+
+// Animation /
+@mixin keyframe-rotate($name, $from, $to) {
+  @-webkit-keyframes #{$name} {
+    0% {
+      -webkit-transform: rotate($from);
+      -moz-transform: rotate($from);
+      -ms-transform: rotate($from);
+      -o-transform: rotate($from);
+      transform: rotate($from);
+    }
+
+    100% {
+      -webkit-transform: rotate($to);
+      -moz-transform: rotate($to);
+      -ms-transform: rotate($to);
+      -o-transform: rotate($to);
+      transform: rotate($to);
+    }
+  }
+
+  @-moz-keyframes #{$name} {
+    0% {
+      -webkit-transform: rotate($from);
+      -moz-transform: rotate($from);
+      -ms-transform: rotate($from);
+      -o-transform: rotate($from);
+      transform: rotate($from);
+    }
+
+    100% {
+      -webkit-transform: rotate($to);
+      -moz-transform: rotate($to);
+      -ms-transform: rotate($to);
+      -o-transform: rotate($to);
+      transform: rotate($to);
+    }
+  }
+
+  @-o-keyframes #{$name} {
+    0% {
+      -webkit-transform: rotate($from);
+      -moz-transform: rotate($from);
+      -ms-transform: rotate($from);
+      -o-transform: rotate($from);
+      transform: rotate($from);
+    }
+
+    100% {
+      -webkit-transform: rotate($to);
+      -moz-transform: rotate($to);
+      -ms-transform: rotate($to);
+      -o-transform: rotate($to);
+      transform: rotate($to);
+    }
+  }
+
+  @keyframes #{$name} {
+    0% {
+      -webkit-transform: rotate($from);
+      -moz-transform: rotate($from);
+      -ms-transform: rotate($from);
+      -o-transform: rotate($from);
+      transform: rotate($from);
+    }
+
+    100% {
+      -webkit-transform: rotate($to);
+      -moz-transform: rotate($to);
+      -ms-transform: rotate($to);
+      -o-transform: rotate($to);
+      transform: rotate($to);
+    }
+  }
+}
+
+@mixin size($width, $height) {
+  width: $width;
+  height: $height;
+}
+
+@mixin square($size) {
+  @include size($size, $size);
+}
+
+
+@mixin circleSize($size) {
+  width: $size;
+  height: $size;
+
+  &::before {
+    width: $size;
+    height: $size;
+    border-left: ($size * 0.125) solid $primary-color;
+    border-right: ($size * 0.125) solid $primary-color;
+    border-bottom: ($size * 0.125) solid transparent;
+    border-top: ($size * 0.125) solid transparent;
+    box-shadow: 0 0 ($size * 0.625) $primary-color;
+  }
+
+  &::after {
+
+    width: $size / 2;
+    height: $size / 2;
+    top: $size * 0.25;
+    left: $size * 0.25;
+    border-left: ($size * 0.125) solid $primary-color;
+    border-right: ($size * 0.125) solid $primary-color;
+    border-bottom: ($size * 0.125) solid transparent;
+    border-top: ($size * 0.125) solid transparent;
+    box-shadow: 0 0 ($size * 0.375) $primary-color;
+  }
+}
+
+.ngx-spin {
+  position: absolute;
+  color: $primary-color;
+  text-align: center;
+  vertical-align: middle;
+  opacity: 0;
+  transition: transform 0.3s $ease-in-out-circ;
+  @include keyframe-rotate(spinner, 0deg, 360deg);
+  @include keyframe-rotate(respinner, 0deg, -360deg);
+
+  &-spinning {
+    position: static;
+    display: inline-block;
+    opacity: 1;
+  }
+
+  // circle ----------------------------
+
+  &-circle {
+    position: relative;
+    content: '';
+    display: flex;
+    margin: 0 auto;
+    opacity: 0.3;
+    animation: spinMove 1s forwards;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      border-radius: 50%;
+      transform: rotateY(180deg);
+      animation: 1s ease-in-out 0s normal none infinite running spinPulse;
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      border-radius: 50%;
+      transform: rotateY(180deg);
+      animation: 1s linear 0s normal none infinite running spinner;
+    }
+
+    @include circleSize($spin-circle-size);
+  }
+
+  &-nested-loading {
+    display: block;
+    position: relative;
+
+    >div>.ngx-spin {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 4;
+      display: block;
+      width: 100%;
+      height: 100%;
+
+      .ngx-spin-circle {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -($spin-circle-size / 2);
+
+        @include circleSize($spin-circle-size);
+      }
+    }
+
+    >div>.ngx-spin-sm {
+      .ngx-spin-circle {
+        margin: -($spin-circle-size-sm / 2);
+
+        @include circleSize($spin-circle-size-sm);
+      }
+    }
+
+    >div>.ngx-spin-lg {
+      .ngx-spin-circle {
+        margin: -($spin-circle-size-lg / 2);
+
+        @include circleSize($spin-circle-size-lg);
+      }
+    }
+  }
+
+  &-container {
+    position: relative;
+    transition: opacity 0.3s;
+
+    &::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 10;
+      display: none;
+      width: 100%;
+      height: 100%;
+      background: $component-background;
+      opacity: 0;
+      transition: all 0.3s;
+      content: '';
+      pointer-events: none;
+    }
+  }
+
+  &-blur {
+    clear: both;
+    overflow: hidden;
+    opacity: 0.5;
+    user-select: none;
+    pointer-events: none;
+
+    &::after {
+      opacity: 0.4;
+      pointer-events: auto;
+    }
+  }
+}
+
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+
+  /* IE10+ */
+  .ngx-spin-blur {
+    background: $component-background;
+    opacity: 0.5;
+  }
+}
+
+@keyframes spinMove {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes spinPulse {
+  0% {
+    box-shadow: 0 0 1px #0a84e2;
+    opacity: 0;
+    transform: rotate(160deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: rotate(145deg);
+  }
+
+  100% {
+    opacity: 0;
+    transform: rotate(-320deg);
+  }
+}
