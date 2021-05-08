@@ -66,9 +66,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {}
 ```
-
-
-
 ## Examples
 
 ### Basic usage
@@ -184,3 +181,7 @@ export class DemoSpinDelayAndDebounceComponent {
 | `[size]`      | size of Spin                                                                            | `'large' \| 'small' \| 'default'` | `'default'`   |
 | `[spinning]`  | whether Spin is spinning                                                                | `boolean`                         | `true`        |
 | `[simple]`    | whether Spin has no children                                                            | `boolean`                         | `false`       |
+
+## Build
+
+Run `npm run build:lib` to build the project. The build artifacts will be stored in the `dist/` directory.

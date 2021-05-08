@@ -1,8 +1,12 @@
 {
   "name": "ngx-spin",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha",
   "author": "t4professor",
   "license": "MIT",
+  "repository": {
+    "url": "https://github.com/t4professor/ngx-spin.git",
+    "type": "git"
+  },
   "peerDependencies": {
     "@angular/common": "^11.0.9",
     "@angular/core": "^11.0.9",
