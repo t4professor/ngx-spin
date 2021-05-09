@@ -13,7 +13,7 @@ When part of the page is waiting for asynchronous data or during a rendering pro
 ## Table of contents
 
 - [Getting started](#getting-started)
-  - [1. Install @ngx-spin](#1-install-ngx-spin)
+  - [1. Install ngx-spin](#1-install-ngx-spin)
   - [2. Import the installed libraries](#2-import-the-installed-libraries)
   - [3. Include `ngx-spin` in your app component](#3-include-ngx-spin-in-your-app-component)
 - [Examples](#xxamples)
@@ -26,10 +26,10 @@ When part of the page is waiting for asynchronous data or during a rendering pro
 
 ## Getting started
 
-#### 1. Install @ngx-spin:
+#### 1. Install ngx-spin:
 
 ```bash
-  npm install @ngx-spin --save
+  npm install ngx-spin --save
 ```
 
 #### 2. Import the installed libraries:
