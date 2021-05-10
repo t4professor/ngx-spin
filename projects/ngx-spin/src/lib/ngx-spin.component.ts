@@ -57,6 +57,7 @@ export class NgxSpinComponent implements OnChanges, OnDestroy, OnInit {
   @Input() delay = 0;
   @Input() simple = false;
   @Input() spinning = true;
+  @Input() duration = 100;
 
   @HostBinding('class.ngx-spin-nested-loading')
   get isNestedLoading(): boolean {
@@ -80,7 +81,7 @@ export class NgxSpinComponent implements OnChanges, OnDestroy, OnInit {
         }
 
         return this.spinning$.pipe(
-          debounce((spinning) => timer(spinning ? delay : 0))
+          debounce((spinning) => timer(spinning ? delay : this.duration))
         );
       }),
       takeUntil(this.destroy$)
