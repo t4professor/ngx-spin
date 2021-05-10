@@ -177,7 +177,7 @@ export class DemoSpinDelayAndDebounceComponent {
 | Property      | Description                                                                             | Type                              | Default Value |
 | ------------- | --------------------------------------------------------------------------------------- | --------------------------------- | ------------- |
 | `[delay]`     | specifies a delay in milliseconds for loading state (prevent flush), unit: milliseconds | `number`                          | -             |
-| `[duration]`  | specifies a duration in milliseconds, if set 1000ms loading indicator will show for at least 1 second to prevent screen flash, unit: milliseconds | `number`                          | 100ms             |
+| `[duration]`  | specifies a duration in milliseconds, if set 1000ms loading indicator will show for at least 1 second to prevent screen flash, unit: milliseconds | `number`                          | `100ms`             |
 | `[indicator]` | the spinning indicator                                                                  | `TemplateRef<void>`               | -             |
 | `[size]`      | size of Spin                                                                            | `'large' \| 'small' \| 'default'` | `'default'`   |
 | `[spinning]`  | whether Spin is spinning                                                                | `boolean`                         | `true`        |
